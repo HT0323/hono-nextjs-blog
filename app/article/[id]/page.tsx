@@ -21,11 +21,11 @@ export default async function Page({
         </Heading>
         <Box pt={5} alignItems="center" display="flex" h={10}>
           <Avatar src="https://avatars.githubusercontent.com/u/84060430?v=4" />
-          <Text> 山田太郎</Text>
-          <Text pl={7}> 2021/11/10 12:12</Text>
+          <Text>{article.userName}</Text>
+          <Text pl={7}>{article.uploadTime}</Text>
         </Box>
         <Text borderTop="0.1rem solid gray" mt={35} pt={5}>
-          OSS（オープンソースソフトウェア）開発に参加することは、技術力向上だけでなく、業界ネットワークを広げる絶好の機会です。例えば、GitHubで気になるプロジェクトをフォークし、小さなバグ修正やドキュメントの改善から始めると、簡単にコミュニティに貢献できます。また、英語力やコードレビューの経験も自然と身につきます。このブログでは、初心者が参加しやすいプロジェクトの見つけ方や、コントリビューションの手順を詳しく解説します。成功事例も交えながら、具体的なステップを紹介します。
+          {article.content}
         </Text>
       </Box>
       <Spacer />

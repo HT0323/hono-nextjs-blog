@@ -42,7 +42,14 @@ export default function Home() {
     <>
       <HStack>
         <Spacer />
-        <Button mt="50px" mr="50px" colorScheme="primary" variant="solid">
+        <Button
+          mt="50px"
+          mr="50px"
+          colorScheme="primary"
+          variant="solid"
+          as={Link}
+          href="/article/new"
+        >
           新規作成
         </Button>
       </HStack>
