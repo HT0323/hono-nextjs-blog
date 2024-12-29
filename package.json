@@ -7,6 +7,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@yamada-ui/react": "^1.7.2",
     "hono": "^4.6.14",
     "next": "14.2.5",
     "react": "18.2.0",
