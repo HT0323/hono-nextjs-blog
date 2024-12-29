@@ -17,10 +17,15 @@ import { hc } from "hono/client";
 import { AppType } from "./api/[...route]/route";
 
 export default function Home() {
-  const [articles, setArticles] =
-    useState<
-      { title: string; content: string; uploadTime: string; userName: string }[]
-    >();
+  const [articles, setArticles] = useState<
+    {
+      id: number;
+      title: string;
+      content: string;
+      uploadTime: string;
+      userName: string;
+    }[]
+  >();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,9 +56,14 @@ export default function Home() {
       <Flex w="full" gap="md">
         <Spacer />
         <List w={1200} mt={30} ml={30}>
-          {articles.map((article, index) => (
-            <ListItem p={5} borderBottom="0.1rem solid gray" key={index}>
-              <Link fontSize={25} lineClamp={1} href="#" pt={5}>
+          {articles.map((article) => (
+            <ListItem p={5} borderBottom="0.1rem solid gray" key={article.id}>
+              <Link
+                fontSize={25}
+                lineClamp={1}
+                href={`article/${article.id}`}
+                pt={5}
+              >
                 {article.title}
               </Link>
               <Text lineClamp={3} pt={5}>
