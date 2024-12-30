@@ -20,8 +20,6 @@ export default async function Home() {
   const response = await client.api.articles.$get();
   const articles = await response.json();
 
-  if (!articles) return <p>Loading...</p>;
-
   return (
     <>
       <HStack>

@@ -2,6 +2,7 @@ import { Heading, Box, Spacer, Text, Flex, Avatar } from "@yamada-ui/react";
 import { hc } from "hono/client";
 import { AppType } from "../../api/[...route]/route";
 import { convertToJST } from "@/app/functions/convertToJst";
+import { notFound } from "next/navigation";
 
 export default async function Page({
   params,
@@ -12,6 +13,9 @@ export default async function Page({
   const client = hc<AppType>("http://localhost:3000/");
   const response = await client.api.article[":id"].$get({ param: { id: id } });
   const article = await response.json();
+  if (!article) {
+    notFound();
+  }
 
   return (
     <Flex w="full" gap="md">

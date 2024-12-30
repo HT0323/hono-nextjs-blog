@@ -1,10 +1,9 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { hc } from "hono/client";
 import { AppType } from "../../api/[...route]/route";
 
-export async function postAction(formData: FormData) {
+export async function postAction(formData: FormData): Promise<boolean> {
   const client = hc<AppType>("http://localhost:3000/", {
     headers: {
       "Content-Type": "application/json",
@@ -17,5 +16,5 @@ export async function postAction(formData: FormData) {
       content: formData.get("content") as string,
     },
   });
-  response.ok && redirect("/");
+  return response.ok;
 }
