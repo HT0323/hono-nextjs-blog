@@ -1,5 +1,3 @@
-"use client";
-import { useEffect, useState } from "react";
 import {
   Heading,
   Link,
@@ -15,26 +13,12 @@ import {
 } from "@yamada-ui/react";
 import { hc } from "hono/client";
 import { AppType } from "./api/[...route]/route";
+import { convertToJST } from "./functions/convertToJst";
 
-export default function Home() {
-  const [articles, setArticles] = useState<
-    {
-      id: number;
-      title: string;
-      content: string;
-      uploadTime: string;
-      userName: string;
-    }[]
-  >();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const client = hc<AppType>("/");
-      const res = await client.api.articles.$get();
-      setArticles(await res.json());
-    };
-    fetchData();
-  }, []);
+export default async function Home() {
+  const client = hc<AppType>("http://localhost:3000/");
+  const response = await client.api.articles.$get();
+  const articles = await response.json();
 
   if (!articles) return <p>Loading...</p>;
 
@@ -78,8 +62,8 @@ export default function Home() {
               </Text>
               <Box pt={5} alignItems="center" display="flex" h={10}>
                 <Avatar src="https://avatars.githubusercontent.com/u/84060430?v=4" />
-                <Text> {article.userName}</Text>
-                <Text pl={7}> {article.uploadTime}</Text>
+                <Text> {article.user.name}</Text>
+                <Text pl={7}> {convertToJST(article.updateAt)}</Text>
               </Box>
             </ListItem>
           ))}
