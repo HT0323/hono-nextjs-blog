@@ -1,5 +1,9 @@
+"use client";
+
+import { useTransition } from "react";
 import {
   Box,
+  useLoading,
   Button,
   Flex,
   FormControl,
@@ -10,11 +14,24 @@ import {
 import { postAction } from "./postAction";
 
 export default function Page() {
+  const { page } = useLoading();
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    page.start();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => {
+      postAction(formData);
+      page.finish();
+    });
+  };
+
   return (
     <Flex w="full" gap="md">
       <Spacer />
       <Box w={1200} mt={30}>
-        <form action={postAction}>
+        <form onSubmit={handleSubmit}>
           <FormControl label="Title" required>
             <Input type="text" name="title" mb={5} />
           </FormControl>

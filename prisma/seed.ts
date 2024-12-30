@@ -15,7 +15,6 @@ async function main() {
   for (const user of userData) {
     await prisma.user.create({
       data: {
-        id: user.id,
         name: user.name,
       },
     });
@@ -26,7 +25,6 @@ async function main() {
   for (const article of articleData) {
     await prisma.article.create({
       data: {
-        id: article.id,
         title: article.title,
         content: article.content,
         userId: article.userId,
